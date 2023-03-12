@@ -1,30 +1,50 @@
 # python3
+from queue import PriorityQueue
 
-def parallel_processing(n, m, data):
+def parallel_processing(n, m, tasks):
     output = []
-    # TODO: write the function for simulating parallel tasks, 
-    # create the output pairs
-
+    threads = []
+    for i in range(n):
+        threads.append(False)
+    totaltime = 0
+    threadsWork = 0
+    q = PriorityQueue()
+    for i in range(m):
+        current = threads.index(False)
+        q.put((tasks[i]+totaltime, current))
+        output.append((current, totaltime))
+        threads[current] = True
+        threadsWork += 1
+        if(threadsWork == n):
+            endedJob = q.get()
+            threads[endedJob[1]] = False
+            threadsWork -= 1
+            if(endedJob[0] > totaltime):
+                totaltime = endedJob[0]
     return output
 
 def main():
-    # TODO: create input from keyboard
-    # input consists of two lines
-    # first line - n and m
-    # n - thread count 
-    # m - job count
-    n = 0
-    m = 0
+    n = 0 #threads
+    m = 0 #jobs/tasks
+    inp = input()
+    if("I" in inp):
+        counts = list(map(int, input().split()))
+        n = counts[0]
+        m = counts[1]
+        tasks = list(map(int, input().split()))
+    elif("F" in inp):
+        FName = input()
+        with open("./test/"+FName, mode="r") as file:
+            counts = file.readline()
+            counts = list(map(int, counts.split()))
+            n = counts[0]
+            m = counts[1]
+            text = file.readline()
+            tasks = list(map(int, text.split()))
 
-    # second line - data 
-    # data - contains m integers t(i) - the times in seconds it takes any thread to process i-th job
-    data = []
-
-    # TODO: create the function
-    result = parallel_processing(n,m,data)
-    
-    # TODO: print out the results, each pair in it's own line
-
+    result = parallel_processing(n,m,tasks)
+    for i in result:
+        print(i[0], i[1])
 
 
 if __name__ == "__main__":
