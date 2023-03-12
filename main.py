@@ -26,6 +26,7 @@ def parallel_processing(n, m, tasks):
 def main():
     n = 0 #threads
     m = 0 #jobs/tasks
+    tasks = []
     inp = input()
     if("I" in inp):
         counts = list(map(int, input().split()))
