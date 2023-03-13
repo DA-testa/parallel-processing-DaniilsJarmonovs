@@ -29,20 +29,10 @@ def main():
     m = 0 #jobs/tasks
     tasks = []
     inp = input()
-    if("I" in inp):
-        counts = list(map(int, input().split()))
-        n = counts[0]
-        m = counts[1]
-        tasks = list(map(int, input().split()))
-    elif("F" in inp):
-        FName = input()
-        with open("./test/"+FName, mode="r") as file:
-            counts = file.readline()
-            counts = list(map(int, counts.split()))
-            n = counts[0]
-            m = counts[1]
-            text = file.readline()
-            tasks = list(map(int, text.split()))
+    counts = list(map(int, input().split()))
+    n = counts[0]
+    m = counts[1]
+    tasks = list(map(int, input().split()))
 
     result = parallel_processing(n,m,tasks)
     for i in result:
