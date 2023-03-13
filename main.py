@@ -1,4 +1,5 @@
 # python3
+#Izstrādāja Daniils Jarmonovs, 18. grupa, 221RDC003
 from queue import PriorityQueue
 
 def parallel_processing(n, m, tasks):
@@ -35,7 +36,8 @@ def main():
         tasks = list(map(int, input().split()))
     elif("F" in inp):
         FName = input()
-        with open("./test/"+FName, mode="r") as file:
+        #with open("./test/"+FName, mode="r") as file:
+        with open(FName, mode="r") as file:
             counts = file.readline()
             counts = list(map(int, counts.split()))
             n = counts[0]
