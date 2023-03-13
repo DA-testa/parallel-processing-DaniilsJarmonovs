@@ -28,7 +28,6 @@ def main():
     n = 0 #threads
     m = 0 #jobs/tasks
     tasks = []
-    inp = input()
     counts = list(map(int, input().split()))
     n = counts[0]
     m = counts[1]
